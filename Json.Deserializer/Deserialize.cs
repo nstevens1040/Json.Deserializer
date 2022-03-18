@@ -122,21 +122,16 @@
                 RecursionLimit = 1020,
                 MaxJsonLength = int.MaxValue
             }.DeserializeObject(input);
-            
-            
             switch (obj)
             {
                 case IDictionary<string, object> _:
                     obj = (object)JsonObject.PopulateFromDictionary(obj as IDictionary<string, object>, out error);
-                    Dictionary<string,object> return_obj = (Dictionary<string,object>)obj;
-                    return return_obj;
                     break;
                 case ICollection<object> _:
                     obj = (object)JsonObject.PopulateFromList(obj as ICollection<object>, out error);
-                    ICollection<object> return_obj = (ICollection<object>)obj;
-                    return return_obj;
                     break;
             }
+            return obj;
         }
     }
     public class Deserialize
